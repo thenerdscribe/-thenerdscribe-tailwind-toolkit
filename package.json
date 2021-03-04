@@ -1,0 +1,15 @@
+{
+  "name": "@thenerdscribe/tailwind-toolkit",
+  "version": "1.0.0",
+  "description": "Collection of tailwindcss utilities for use on projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "thenerdscrib",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "tailwindcss": "^2.0.3"
+  }
+}
