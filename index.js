@@ -2,8 +2,7 @@ const plugin = require("tailwindcss/plugin");
 const colors = require("tailwindcss/colors");
 const _ = require("lodash");
 
-module.exports = function() {
-function({ addUtilities, theme }) {
+module.exports = plugin(function ({ addUtilities, theme }) {
   const alternatingColors = (colors, offset) =>
     _.map(colors, (colorSteps, name) => {
       return _.map(colorSteps, (color, step) => ({
@@ -25,4 +24,4 @@ function({ addUtilities, theme }) {
     ...alternatingThemeEven,
     ...alternatingThemeOdd,
   ]);
-}};
+});
