@@ -1,15 +1,16 @@
 const plugin = require("tailwindcss/plugin");
 const colors = require("tailwindcss/colors");
-const _ = require("lodash");
+const buildShadowPalette = requre("buildShadowPalette");
+const {map, isObject} = require("lodash");
 
-module.exports = plugin(function ({ addUtilities, theme }) {
+module.exports = plugin(function ({ addUtilities, theme, variants }) {
   const alternatingColors = (colors, offset) =>
-    _.map(colors, (colorSteps, name) => {
-      return _.map(colorSteps, (color, step) => ({
+    map(colors, (colorSteps, name) => {
+      return map(colorSteps, (color, step) => ({
         [`.alternating-${offset}-${name}${
-          _.isObject(colorSteps) && step !== "DEFAULT" ? `-${step}` : ""
+          isObject(colorSteps) && step !== "DEFAULT" ? `-${step}` : ""
         } > *:nth-child(${offset})`]: {
-          "background-color": _.isObject(colorSteps) ? color : colorSteps,
+          "background-color": isObject(colorSteps) ? color : colorSteps,
         },
       }));
     });
@@ -23,5 +24,9 @@ module.exports = plugin(function ({ addUtilities, theme }) {
     ...alternatingColorsEven,
     ...alternatingThemeEven,
     ...alternatingThemeOdd,
-  ]);
+    ...buildShadowPalette(theme)
+  ], {
+    variants: [...variants('boxShadow'), 'active']
+  });
 });
+
